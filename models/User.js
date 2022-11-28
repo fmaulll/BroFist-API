@@ -10,6 +10,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  sex: {
+    type: String,
+    required: false,
+  },
+  height: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  weight: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   email: {
     type: String,
     required: true,
@@ -21,6 +35,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  wins: {
+    type: Number,
+    required: false,
+    default: 0,
   },
 });
 

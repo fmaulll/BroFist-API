@@ -2,9 +2,24 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const UserSchema = require("../models/User");
 
+let refreshTokens = [];
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "15m",
+  });
+};
+
+const token = async (req, res) => {
+  const refreshToken = req.body.token;
+  if (refreshToken == null) return res.status(401);
+
+  if (!refreshTokens.includes(refreshToken)) return res.status(403);
+
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) return res.status(403);
+    const accessToken = generateToken(user._id);
+    res.json({ accessToken: accessToken });
   });
 };
 
@@ -14,22 +29,29 @@ const login = async (req, res) => {
 
     const user = await UserSchema.findOne({ username });
 
+    if (!user) return res.status(404).send({ message: "Username not found!" });
+
     const compare = await user.matchPassword(password, user.password);
 
+    const accessToken = generateToken(user._id);
+    // const refreshToken = jwt.sign(user._id, process.env.JWT_SECRET_REFRESH);
+    // refreshTokens.push(refreshToken);
+
     if (compare) {
-      res
-        .status(200)
-        .json({
-          message: "Logged in!",
-          token: generateToken(user._id),
-          id: user._id,
-          username: user.username,
-        });
+      res.status(200).json({
+        message: "Logged in!",
+        token: accessToken,
+        // refreshToken: refreshToken,
+        id: user._id,
+        username: user.username,
+      });
     } else {
-      res.status(401).json({ message: "Invalid credentials!" });
+      res.status(401).json({
+        message: "Invalid credentials!",
+      });
     }
-  } catch (err) {
-    res.status(500).json({ message: "Error occurred!", err });
+  } catch (error) {
+    res.status(500).json(error);
   }
 };
 
@@ -63,13 +85,12 @@ const register = async (req, res) => {
       _id: newUser._id,
       userName: newUser.username,
       email: newUser.email,
-      token: generateToken(newUser._id),
     });
 
     await newUser.save();
-  } catch (err) {
-    res.status(500).json({ message: `Something went wrong!, ${err}` });
+  } catch (error) {
+    res.status(500).json({ message: `Something went wrong!, ${error}` });
   }
 };
 
-module.exports = { register, login };
+module.exports = { token, register, login };
