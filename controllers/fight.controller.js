@@ -4,20 +4,17 @@ require("dotenv").config();
 
 const allFighters = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const allUsers = await UserSchema.find({}).select({
-      username: 1,
-      fname: 1,
-      lname: 1,
-      height: 1,
-      weight: 1,
-      wins: 1,
-    });
-    const userIndex = allUsers.findIndex(
-      (person) => person._id.toString() === userId
+    const { id } = req.params;
+
+    let fighters = await UserSchema.findOne({_id: id})
+    
+    const userIndex = fighters.showFighters.findIndex(
+      (person) => person._id.toString() === id
     );
-    allUsers.splice(userIndex, 1)
-    return res.status(200).json({ data: allUsers });
+
+    fighters.showFighters.splice(userIndex, 1)
+
+    return res.status(200).json({ data: fighters.showFighters });
   } catch (error) {
     return res.status(500).send({ message: "Error getting fighters!", error });
   }

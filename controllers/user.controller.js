@@ -71,6 +71,15 @@ const register = async (req, res) => {
         .json({ message: "Error!, username already exist!" });
     }
 
+    const allUsers = await UserSchema.find({}).select({
+      username: 1,
+      fname: 1,
+      lname: 1,
+      height: 1,
+      weight: 1,
+      wins: 1,
+    });
+
     const newUser = await UserSchema.create({
       fname,
       lname,
@@ -86,6 +95,21 @@ const register = async (req, res) => {
       userName: newUser.username,
       email: newUser.email,
     });
+
+    await UserSchema.updateMany(
+      {},
+      {
+        showFighters: [
+          ...allUsers,
+          {
+            _id: newUser._id,
+            fname: newUser.fname,
+            lname: newUser.lname,
+            username: newUser.username,
+          },
+        ],
+      }
+    );
 
     await newUser.save();
   } catch (error) {

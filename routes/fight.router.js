@@ -17,7 +17,7 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-fightRouter.post("/all-fighters", authenticateToken, allFighters);
+fightRouter.get("/all-fighters/:id", authenticateToken, allFighters);
 fightRouter.post("/person-to-fight", authenticateToken, fightPerson)
 
 module.exports = fightRouter;
