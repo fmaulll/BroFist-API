@@ -1,5 +1,5 @@
 const express = require("express");
-const { allFighters } = require("../controllers/fight.controller");
+const { allFighters, fightPerson } = require("../controllers/fight.controller");
 const fightRouter = express.Router();
 const jwt = require("jsonwebtoken");
 
@@ -18,5 +18,6 @@ const authenticateToken = (req, res, next) => {
 };
 
 fightRouter.get("/all-fighters", authenticateToken, allFighters);
+fightRouter.post("/person-to-fight", authenticateToken, fightPerson)
 
 module.exports = fightRouter;

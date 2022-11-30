@@ -1,6 +1,17 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const matchesSchema = new mongoose.Schema({
+  fname: String,
+  lname: String,
+  _id: String,
+});
+const peopleToFightSchema = new mongoose.Schema({
+  fname: String,
+  lname: String,
+  _id: String,
+});
+
 const userSchema = new mongoose.Schema({
   fname: {
     type: String,
@@ -41,6 +52,8 @@ const userSchema = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  peopleToFight: [peopleToFightSchema],
+  matches: [matchesSchema],
 });
 
 userSchema.methods.encryptPassword = async (password) => {
