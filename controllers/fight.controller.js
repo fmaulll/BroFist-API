@@ -6,13 +6,17 @@ const allFighters = async (req, res) => {
   try {
     const { id } = req.params;
 
-    let fighters = await UserSchema.findOne({_id: id})
-    
+    let fighters = await UserSchema.findOne({ _id: id });
+
     const userIndex = fighters.showFighters.findIndex(
       (person) => person._id.toString() === id
     );
 
-    fighters.showFighters.splice(userIndex, 1)
+    fighters.showFighters.splice(userIndex, 1);
+
+    if (fighters.showFighters.length < 1) {
+      return res.status(200).json({ data: null });
+    }
 
     return res.status(200).json({ data: fighters.showFighters });
   } catch (error) {
@@ -28,10 +32,15 @@ const fightPerson = async (req, res) => {
     const user = await UserSchema.findOne({ _id: userId });
 
     const validateMatch = personToFight.peopleToFight.find(
-      (person) => person._id === userId
+      (person) => person._id.toString() === userId
     );
+
     const indexObject = personToFight.peopleToFight.findIndex(
-      (person) => person._id === personId
+      (person) => person._id.toString() === personId
+    );
+
+    const indexShowFighter = user.showFighters.findIndex(
+      (person) => person._id.toString() === personId
     );
 
     if (validateMatch) {
@@ -46,11 +55,17 @@ const fightPerson = async (req, res) => {
         lname: personToFight.lname,
         _id: personToFight._id,
       });
+
+      user.showFighters.splice(indexShowFighter, 1);
+
       await personToFight.save();
       await user.save();
 
       return res.status(200).json({ message: "Matched" });
     }
+
+    user.showFighters.splice(indexShowFighter, 1);
+
     user.peopleToFight.push({
       fname: personToFight.fname,
       lname: personToFight.lname,
