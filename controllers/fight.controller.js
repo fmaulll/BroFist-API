@@ -32,15 +32,15 @@ const fightPerson = async (req, res) => {
     const user = await UserSchema.findOne({ _id: userId });
 
     const validateMatch = personToFight.peopleToFight.find(
-      (person) => person._id.toString() === userId
+      (person) => person._id === userId
     );
 
     const indexObject = personToFight.peopleToFight.findIndex(
-      (person) => person._id.toString() === personId
+      (person) => person._id === personId
     );
 
     const indexShowFighter = user.showFighters.findIndex(
-      (person) => person._id.toString() === personId
+      (person) => person._id === personId
     );
 
     if (validateMatch) {

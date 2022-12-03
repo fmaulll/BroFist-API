@@ -20,16 +20,19 @@ const fightersSchema = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  imageUrl: String,
 });
 const matchesSchema = new mongoose.Schema({
   fname: String,
   lname: String,
   _id: String,
+  imageUrl: String,
 });
 const peopleToFightSchema = new mongoose.Schema({
   fname: String,
   lname: String,
   _id: String,
+  imageUrl: String,
 });
 
 const userSchema = new mongoose.Schema({
@@ -75,6 +78,7 @@ const userSchema = new mongoose.Schema({
   peopleToFight: [peopleToFightSchema],
   matches: [matchesSchema],
   showFighters: [fightersSchema],
+  imageUrl: String,
 });
 
 userSchema.methods.encryptPassword = async (password) => {
