@@ -1,0 +1,138 @@
+[
+    {
+        "province": "Aceh",
+        "capitalCity": "Banda Aceh" 
+    },
+    {
+        "province": "Sumatera Utara",
+        "capitalCity": "Medan" 
+    },
+    {
+        "province": "Sumatera Barat",
+        "capitalCity": "Padang" 
+    },
+    {
+        "province": "Riau",
+        "capitalCity": "Pekanbaru" 
+    },
+    {
+        "province": "Jambi",
+        "capitalCity": "Jambi" 
+    },
+    {
+        "province": "Sumatera Selatan",
+        "capitalCity": "Palembang" 
+    },
+    {
+        "province": "Bengkulu",
+        "capitalCity": "Bengkulu" 
+    },
+    {
+        "province": "Lampung",
+        "capitalCity": "Bandar Lampung" 
+    },
+    {
+        "province": "Kepulauan Bangka Belitung",
+        "capitalCity": "Pangkal Pinang" 
+    },
+    {
+        "province": "Pangkal Pinang",
+        "capitalCity": "Tanjung Pinang" 
+    },
+    {
+        "province": "Jakarta",
+        "capitalCity": "Jakarta" 
+    },
+    {
+        "province": "Jawa Barat",
+        "capitalCity": "Bandung" 
+    },
+    {
+        "province": "Jawa Tengah",
+        "capitalCity": "Semarang" 
+    },
+    {
+        "province": "Yogyakarta",
+        "capitalCity": "Yogyakarta" 
+    },
+    {
+        "province": "Jawa Timur",
+        "capitalCity": "Surabaya" 
+    },
+    {
+        "province": "Banten",
+        "capitalCity": "Banten" 
+    },
+    {
+        "province": "Bali",
+        "capitalCity": "Denpasar" 
+    },
+    {
+        "province": "Nusa Tenggara Barat",
+        "capitalCity": "Mataram" 
+    },
+    {
+        "province": "Nusa Tenggara Timur",
+        "capitalCity": "Kupang" 
+    },
+    {
+        "province": "Kalimantan Barat",
+        "capitalCity": "Pontianak" 
+    },
+    {
+        "province": "Kalimantan Tengah",
+        "capitalCity": "Palangka Raya" 
+    },
+    {
+        "province": "Kalimantan Selatan",
+        "capitalCity": "Banjarmasin" 
+    },
+    {
+        "province": "Kalimantan Timur",
+        "capitalCity": "Samarinda" 
+    },
+    {
+        "province": "Kalimantan Utara",
+        "capitalCity": "Tanjung Selor" 
+    },
+    {
+        "province": "Sulawesi Utara",
+        "capitalCity": "Manado" 
+    },
+    {
+        "province": "Sulawesi Tengah",
+        "capitalCity": "Palu" 
+    },
+    {
+        "province": "Sulawesi Selatan",
+        "capitalCity": "Makassar" 
+    },
+    {
+        "province": "Sulawesi Tenggara",
+        "capitalCity": "Kendari" 
+    },
+    {
+        "province": "Gorontalo",
+        "capitalCity": "Gorontalo" 
+    },
+    {
+        "province": "Sulawesi Barat",
+        "capitalCity": "Mamuju" 
+    },
+    {
+        "province": "Maluku",
+        "capitalCity": "Ambon" 
+    },
+    {
+        "province": "Maluku Utara",
+        "capitalCity": "Sofifi" 
+    },
+    {
+        "province": "Papua",
+        "capitalCity": "Jayapura" 
+    },
+    {
+        "province": "Papua Barat",
+        "capitalCity": "Manokwari" 
+    }
+]

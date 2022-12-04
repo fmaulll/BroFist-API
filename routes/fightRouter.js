@@ -1,5 +1,5 @@
 const express = require("express");
-const { allFighters, fightPerson } = require("../controllers/fight.controller");
+const { allFighters, fightPerson } = require("../controllers/fightController");
 const fightRouter = express.Router();
 const jwt = require("jsonwebtoken");
 
