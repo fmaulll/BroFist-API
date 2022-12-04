@@ -57,7 +57,8 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { fname, lname, email, username, password } = req.body;
+    const { fname, lname, email, username, password, height, weight } = req.body;
+    const filePath = req.file.path.split("").splice(7, req.file.path.length).join("")
 
     const emailExist = await UserSchema.findOne({ email });
     const usernameExist = await UserSchema.findOne({ username });
@@ -71,15 +72,46 @@ const register = async (req, res) => {
         .json({ message: "Error!, username already exist!" });
     }
 
+    const allUsers = await UserSchema.find({}).select({
+      username: 1,
+      fname: 1,
+      lname: 1,
+      height: 1,
+      weight: 1,
+      wins: 1,
+      imageUrl: 1
+    });
+
     const newUser = await UserSchema.create({
       fname,
       lname,
       email,
       username,
       password,
+      height,
+      weight,
+      imageUrl: `${process.env.API_URL}/${filePath}`,
     });
 
     newUser.password = await newUser.encryptPassword(password);
+
+    await UserSchema.updateMany(
+      {},
+      {
+        showFighters: [
+          ...allUsers,
+          {
+            _id: newUser._id,
+            fname: newUser.fname,
+            lname: newUser.lname,
+            username: newUser.username,
+            height: newUser.height,
+            weight: newUser.weight,
+            imageUrl: newUser.imageUrl,
+          },
+        ],
+      }
+    );
 
     res.status(201).json({
       _id: newUser._id,
