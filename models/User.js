@@ -78,7 +78,18 @@ const userSchema = new mongoose.Schema({
   peopleToFight: [peopleToFightSchema],
   matches: [matchesSchema],
   showFighters: [fightersSchema],
-  imageUrl: String,
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  province: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.methods.encryptPassword = async (password) => {

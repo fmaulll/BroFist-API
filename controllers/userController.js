@@ -57,8 +57,21 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   try {
-    const { fname, lname, email, username, password, height, weight } = req.body;
-    const filePath = req.file.path.split("").splice(7, req.file.path.length).join("")
+    const {
+      fname,
+      lname,
+      email,
+      username,
+      password,
+      height,
+      weight,
+      province,
+      city,
+    } = req.body;
+    const filePath = req.file.path
+      .split("")
+      .splice(7, req.file.path.length)
+      .join("");
 
     const emailExist = await UserSchema.findOne({ email });
     const usernameExist = await UserSchema.findOne({ username });
@@ -79,7 +92,9 @@ const register = async (req, res) => {
       height: 1,
       weight: 1,
       wins: 1,
-      imageUrl: 1
+      imageUrl: 1,
+      province: 1,
+      city: 1,
     });
 
     const newUser = await UserSchema.create({
@@ -91,6 +106,8 @@ const register = async (req, res) => {
       height,
       weight,
       imageUrl: `${process.env.API_URL}/${filePath}`,
+      province,
+      city,
     });
 
     newUser.password = await newUser.encryptPassword(password);
@@ -108,6 +125,8 @@ const register = async (req, res) => {
             height: newUser.height,
             weight: newUser.weight,
             imageUrl: newUser.imageUrl,
+            province: newUser.province,
+            city: newUser.city,
           },
         ],
       }

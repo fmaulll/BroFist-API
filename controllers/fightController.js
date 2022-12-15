@@ -78,4 +78,14 @@ const fightPerson = async (req, res) => {
   }
 };
 
-module.exports = { allFighters, fightPerson };
+const showMatches = async (req, res) => {
+  try {
+    const { id } = req.params
+    const matches = UserSchema.findById({_id: id})
+    return res.json(matches)
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+};
+
+module.exports = { allFighters, fightPerson, showMatches };
